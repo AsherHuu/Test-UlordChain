@@ -295,8 +295,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (   0, uint256S("0x0000079b37c3c290dc81e95bca28aa7df5636145ae35ebee86e10cc3cce96fb2"))
-	    (   1, uint256S("0x0000024144690ff578c3bddd90e2254cd5ba11632e1361c810cf0b9ccc45ed84")),
+            (   0, uint256S("0x0000079b37c3c290dc81e95bca28aa7df5636145ae35ebee86e10cc3cce96fb2")),
             1526704298,                       // * UNIX timestamp of last checkpoint block
             0,                                // * total number of transactions between genesis and last checkpoint
                                               //   (the tx=... number in the SetBestChain debug.log lines)
@@ -305,8 +304,8 @@ public:
 
         // Founders reward script expects a vector of 2-of-3 multisig addresses
         vFoundersRewardAddress = {
-            "UkzpmKhQykbTaRH1wLXUmwFDZqmiMV719r", /* main-index: 0*/
-            "UVu15LEZH3SJxncSH6pgtWtzMray71ir3g", /* main-index: 1*/
+            "UfckqaM9rWHsZrQXQGtCuMa5gx6XzZsSN8", /* main-index: 0*/
+            "Uk9j8BswCeKM8iHgT3otuc6FPYRFeGCCCA", /* main-index: 1*/
 	    };
     }
 };
