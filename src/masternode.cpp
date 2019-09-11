@@ -1098,7 +1098,7 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
     if (!CheckSignature(pmn->pubKeyMasternode, nDos)) return false;
 
     // check the certificate and make sure if the masternode had registered on the Ulord center server
-    if(certifyPeriod != pmn->certifyPeriod || pmn->certificate != certificate || certifyVersion != pmn->certifyVersion) {
+    if(certifyPeriod > pmn->certifyPeriod || pmn->certificate != certificate || certifyVersion != pmn->certifyVersion) {
         if(!mnodecenter.VerifyLicense(*this)) {
             pmn->nActiveState = pmn->MASTERNODE_NO_REGISTERED;
             LogPrintf("MNPING -- Verify license failed masternode=%s\n",vin.prevout.ToStringShort());
@@ -1110,6 +1110,12 @@ bool CMasternodePing::CheckAndUpdate(CMasternode* pmn, bool fFromNewBroadcast, i
         pmn->certifyVersion = certifyVersion;
     }
 
+    // so, ping is old to check , let's skip it
+    if(certifyPeriod <= GetTime())
+    {
+       LogPrint("masternode", "CMasternodePing::CheckAndUpdate -- certifyPeriod ping old %d , masternode=%s\n",certifyPeriod,  vin.prevout.ToStringShort());
+       return false;
+    }
     // so, ping seems to be ok, let's store it
     LogPrint("masternode", "CMasternodePing::CheckAndUpdate -- Masternode ping accepted, masternode=%s\n", vin.prevout.ToStringShort());
     pmn->lastPing = *this;    
